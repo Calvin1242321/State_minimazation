@@ -2,11 +2,8 @@
 digital logic design-project4 
   
     .start_kiss  
-  
     .i 1  
-  
     .o 1  
-  
     .p 14  
   
   .s 7  
