@@ -18,9 +18,9 @@ int main(int argc, char** argv)
 			return -1;
 		}
 		else
-		{
 			readfile(fin);
-		}
+			
+		
 	}
 	else
 		return -1;
