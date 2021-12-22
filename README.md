@@ -1,13 +1,13 @@
 # State_minimazation
 digital logic design-project4 
   
-  .start_kiss  
+    .start_kiss  
   
-  .i 1  
+    .i 1  
   
-  .o 1  
+    .o 1  
   
-  .p 14  
+    .p 14  
   
   .s 7  
   
