@@ -1,5 +1,6 @@
 # State_minimazation
 digital logic design-project4 
+format of input
   
     .start_kiss  
     .i 1  
