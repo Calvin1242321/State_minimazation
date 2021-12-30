@@ -49,4 +49,14 @@ format of output ( dot )
         g -> f [label="1/1"];
     }
 
+# How To Execute
+1.Download the file in linux.
+2.Enter to this file.
+3.Right click to blank space in this folder and select "Open in Terminal".
+4.Enter "g++ source.cpp". It would generate a file named 'a.out'.
+5.Enter "./a.out XXX.kiss" XXX is the name of kiss file, you would see input.dot & output.dot if there's no error.
+6.Enter "dot -T png robdd.dot > output.png". 
 
+
+*NOTE
+This program only supports 1 input.
