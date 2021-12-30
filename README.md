@@ -28,18 +28,25 @@ format of input
 format of output ( dot )  
   
     digraph STG{
-      rankdir = LR;
-	    INIT[shape = point];
-	    b [label="b"];
-	    c [label="c"];
-	    d [label="d"];
-	    INIT -> b;
-	    b -> c [label="0/0"];
-	    b -> d [label="1/0"];
-	    c -> d [label="0/0"];
-	    c -> d [label="1/1"];
-	    d -> c [label="0/0"];
-  	  d -> b [label="1/0"];
+        rankdir = LR;
+        INIT[shape = point];
+        a [label="a"];
+        b [label="b"];
+        c [label="c"];
+        f [label="f"];
+        g [label="g"];
+
+        INIT -> a;
+        a -> a [label="0/0"];
+        a -> b [label="1/0"];
+        b -> c [label="0/0"];
+        b -> f [label="1/0"];
+        c -> a [label="0/0"];
+        c -> f [label="1/0"];
+        f -> g [label="0/0"];
+        f -> f [label="1/1"];
+        g -> a [label="0/0"];
+        g -> f [label="1/1"];
     }
 
 
