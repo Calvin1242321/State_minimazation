@@ -1,7 +1,7 @@
 # State_minimazation
 digital logic design-project4  
 
-format of input
+format of input ( KISS )
   
     .start_kiss  
     .i 1  
@@ -25,7 +25,7 @@ format of input
     1 g f 1
     .end_kiss
 
-format of output ( dot )  
+format of output ( DOT )  
   
     digraph STG{
         rankdir = LR;
@@ -47,7 +47,9 @@ format of output ( dot )
         f -> f [label="1/1"];
         g -> a [label="0/0"];
         g -> f [label="1/1"];
-    }
+    }  
+    
+You can see the picture of input and output in the file called 'output_pic'
 
 # How To Execute
 1.Download the file in linux.  
@@ -60,7 +62,7 @@ format of output ( dot )
 
 5.Enter "./a.out XXX.kiss" XXX is the name of kiss file, you would see input.dot & output.dot if there's no error.  
 
-6.Enter "dot -T png robdd.dot > output.png".   
+6.Enter "dot -T png output.dot > output.png".   
 
 
 
