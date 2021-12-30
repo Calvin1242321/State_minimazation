@@ -14,17 +14,18 @@ typedef struct sh
 	bool keep = false;
 }Cell;
 
-//void save(string fileName, string filetitle, node* n, int size)
-//void readfile(ifstream&);
 
-void save(char** arr, int size, char* alphalist, bool* alphasave, int size2, char startp);
+int readfile(ifstream&);
+
+void save(string fileName, char** arr, int size, char* alphalist, bool* alphasave, int size2, char startp);
+
+void outputSheet(string fileName, int inputN, int outputN, char** arr, int size, char* alphalist, bool* alphasave, int size2, char startp);
 
 int convertEngInt(char input);
-int readfile();
 
 int main(int argc, char** argv)
 {
-	/*if (argc == 2)
+	if (argc == 2)
 	{
 		ifstream fin(argv[1]);
 		if (!fin)
@@ -34,35 +35,31 @@ int main(int argc, char** argv)
 		}
 		else
 			readfile(fin);
-
-
 	}
 	else
-		return -1;*/
-	readfile();
+		return -1;
 }
 
-//void readfile(ifstream& fin)
 
-int readfile()
+int readfile(ifstream& fin)
 {
 	string s;
-	int inputN = 0;				// 1 ~ 2
-	int outputN = 0;			// 1
-	int statementN = 0;			// 4 ~ 6
+	int inputN = 0;
+	int outputN = 0;
+	int statementN = 0;
 	int alphabetN = 0;
 	char startP;
-	cin >> s;
-	cin >> s;		
-	cin >> inputN;	//i
-	cin >> s;		
-	cin >> outputN;	//o
-	cin >> s;		
-	cin >> statementN;	//p
-	cin >> s;		
-	cin >> alphabetN;	//s
-	cin >> s;		
-	cin >> startP;		//r
+	fin >> s;
+	fin >> s;
+	fin >> inputN;	//i
+	fin >> s;
+	fin >> outputN;	//o
+	fin >> s;
+	fin >> statementN;	//p
+	fin >> s;
+	fin >> alphabetN;	//s
+	fin >> s;
+	fin >> startP;		//r
 
 	char** state_arr = new char* [statementN];
 	for (int i = 0;i < statementN;i++)
@@ -101,7 +98,7 @@ int readfile()
 			cout << "out of range ( varible 0 to 8 )\n";
 			return -1;
 			break;
-		}	
+		}
 	}
 
 	bool* alphasave = new bool[alphabetN];
@@ -110,8 +107,8 @@ int readfile()
 
 	for (int i = 0;i < statementN;i++)
 		for (int j = 0;j < 4;j++)	cin >> state_arr[i][j];
-			
-	
+
+
 
 	char** sheet = new char* [alphabetN];
 	for (int i = 0;i < alphabetN;i++)
@@ -130,18 +127,18 @@ int readfile()
 	}
 	cout << "sheet" << endl;
 	for (int i = 0;i < alphabetN;i++)
-		cout << sheet[i][0] << " " << sheet[i][1]<< " " << sheet[i][2] << " " <<  sheet[i][3] << " " << sheet[i][4] << endl;
-	
-	cin >> s;	//end_kiss
+		cout << sheet[i][0] << " " << sheet[i][1] << " " << sheet[i][2] << " " << sheet[i][3] << " " << sheet[i][4] << endl;
 
-	save(state_arr, statementN, alphalist, alphasave, alphabetN, startP);
+	fin >> s;	//end_kiss
+
+	save("input.dot", state_arr, statementN, alphalist, alphasave, alphabetN, startP);
 
 	// simplize
 
-	Cell** cell = new Cell* [alphabetN - 1];
-	for(int i = 0;i < alphabetN - 1;i++)
+	Cell** cell = new Cell * [alphabetN - 1];
+	for (int i = 0;i < alphabetN - 1;i++)
 		cell[i] = new Cell[alphabetN - 1];
-	
+
 	// initial
 	for (int i = 0;i < alphabetN - 1;i++)
 	{
@@ -153,8 +150,8 @@ int readfile()
 			cell[i][j].f1.clear();
 		}
 	}
-	
-	//	setting	
+
+	//	setting
 	for (int i = 0;i < alphabetN - 1;i++)
 	{
 		for (int j = 0;j < alphabetN - 1;j++)
@@ -178,7 +175,7 @@ int readfile()
 		{
 			if (cell[i][j].remove)	continue;
 			if (cell[i][j].f0[0] == cell[i][j].f0[1] && cell[i][j].f1[0] == cell[i][j].f1[1])
-				cell[i][j].keep = true;	
+				cell[i][j].keep = true;
 		}
 	}
 
@@ -197,7 +194,7 @@ int readfile()
 			}
 		}
 	}
-	
+
 	//	reserve
 	for (int i = 0;i < vec_k.size();i++)
 	{
@@ -256,7 +253,7 @@ int readfile()
 					}
 					if (!cell[i0][i1].remove || (cell[j][k].f1[0] == cell[j][k].f1[1]))
 						cell[j][k].keep = true;
-				}			
+				}
 				if (checker == cell[j][k].f1)
 				{
 					switch (cell[j][k].f0[0])
@@ -302,7 +299,7 @@ int readfile()
 						break;
 					}
 					if (!cell[i0][i1].remove)
-						cell[j][k].keep = true;	
+						cell[j][k].keep = true;
 				}
 			}
 		}
@@ -367,7 +364,7 @@ int readfile()
 					{
 						cell[i][j].remove = true;
 						needagain = true;
-					}			
+					}
 				}
 				if (cell[i][j].f1[0] != cell[i][j].f1[1])
 				{
@@ -386,12 +383,12 @@ int readfile()
 						cell[i][j].remove = true;
 						needagain = true;
 					}
-						
+
 				}
 			}
 		}
 	}
-	
+
 	//  Delete rows on the sheet
 	int statmentNumAfterDeleted = alphabetN;
 	for (int i = 0;i < alphabetN - 1;i++)
@@ -412,7 +409,7 @@ int readfile()
 			}
 		}
 	}
-	cout << "123:"<< statmentNumAfterDeleted << endl;
+
 	char** state_arr_del = new char* [statmentNumAfterDeleted * 2];
 	for (int i = 0;i < statmentNumAfterDeleted * 2;i++)
 		state_arr_del[i] = new char[4];
@@ -432,7 +429,7 @@ int readfile()
 		j = j + 2;
 	}
 	for (int i = 0;i < statmentNumAfterDeleted * 2; i++)
-		cout << state_arr_del[i][0] << " "<< state_arr_del[i][1] << " " << state_arr_del[i][2] << " " << state_arr_del[i][3] << endl;
+		cout << state_arr_del[i][0] << " " << state_arr_del[i][1] << " " << state_arr_del[i][2] << " " << state_arr_del[i][3] << endl;
 
 	cout << "remove" << endl;
 	for (int i = 0;i < alphabetN - 1;i++)
@@ -450,28 +447,29 @@ int readfile()
 	cout << "sheet after simplize.\n";
 	for (int i = 0;i < alphabetN;i++)
 	{
-		if(alphasave[i])
+		if (alphasave[i])
 			cout << sheet[i][0] << " " << sheet[i][1] << " " << sheet[i][2] << " " << sheet[i][3] << " " << sheet[i][4] << endl;
 	}
-	save(state_arr_del, statmentNumAfterDeleted * 2, alphalist, alphasave, alphabetN, startP);
+	save("output.dot", state_arr_del, statmentNumAfterDeleted * 2, alphalist, alphasave, alphabetN, startP);
+	outputSheet("output.kiss", inputN, outputN, state_arr_del, statmentNumAfterDeleted * 2, alphalist, alphasave, alphabetN, startP);
+	return 0;
 }
 
-//void save(string fileName, char** arr, int size, char* alphalist, int size2, char startp);
-//save(state_arr, statementN, alphalist, alphabetN, startP);
-void save(char** arr, int size, char* alphalist, bool* alphasave, int size2, char startp)
+//save(string fileName, char** arr, int size, char* alphalist, bool* alphasave, int size2, char startp);
+void save(string fileName, char** arr, int size, char* alphalist, bool* alphasave, int size2, char startp)
 {
-	//ofstream fout(fileName, ofstream::out);
+	ofstream fout(fileName, ofstream::out);
 	cout << "digraph STG{\n\t" << "rankdir = LR;" << endl;
 	cout << "\tINIT[shape = point];" << endl;
 	for (int i = 0;i < size2;i++)
 	{
-		if(alphasave[i])
+		if (alphasave[i])
 			cout << "\t" << alphalist[i] << " [label=\"" << alphalist[i] << "\"];" << endl;
 	}
-		
+
 
 	cout << "\n\tINIT -> " << startp << ";" << endl;
-	
+
 	for (int i = 0;i < size;i++)
 	{
 		char t = arr[i][0];
@@ -479,9 +477,40 @@ void save(char** arr, int size, char* alphalist, bool* alphasave, int size2, cha
 		cout << "\t" << arr[i][1] << " -> " << arr[i][2] << " [label=\"" << t << "/" << t1 << "\"];" << endl;
 	}
 	cout << "}\n";
-}
-//save("robdd.dot");
 
+	fout << "digraph STG{\n\t" << "rankdir = LR;" << endl;
+	fout << "\tINIT[shape = point];" << endl;
+	for (int i = 0;i < size2;i++)
+	{
+		if (alphasave[i])
+			fout << "\t" << alphalist[i] << " [label=\"" << alphalist[i] << "\"];" << endl;
+	}
+
+
+	fout << "\n\tINIT -> " << startp << ";" << endl;
+
+	for (int i = 0;i < size;i++)
+	{
+		char t = arr[i][0];
+		char t1 = arr[i][3];
+		fout << "\t" << arr[i][1] << " -> " << arr[i][2] << " [label=\"" << t << "/" << t1 << "\"];" << endl;
+	}
+	fout << "}\n";
+}
+
+void outputSheet(string fileName, int inputN, int outputN, char** arr, int size, char* alphalist, bool* alphasave, int size2, char startp)
+{
+    ofstream fout(fileName, ofstream::out);
+	fout << ".start_kiss" << endl;
+	fout << ".i " << inputN <<endl;
+	fout << ".o " << outputN << endl;
+	fout << ".p " << size << endl;
+	fout << ".s " << size / 2 << endl;
+	fout << ".r " << startp << endl;
+	for (int i = 0;i < size; i++)
+		fout << arr[i][0] << " " << arr[i][1] << " " << arr[i][2] << " " << arr[i][3] << endl;
+	fout << ".end_kiss" << endl;
+}
 int convertEngInt(char input)
 {
 	switch (input)
