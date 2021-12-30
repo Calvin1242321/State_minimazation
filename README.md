@@ -25,3 +25,21 @@ format of input
     1 g f 1
     .end_kiss
 
+format of output ( dot )  
+  
+    digraph STG{
+      rankdir = LR;
+	    INIT[shape = point];
+	    b [label="b"];
+	    c [label="c"];
+	    d [label="d"];
+	    INIT -> b;
+	    b -> c [label="0/0"];
+	    b -> d [label="1/0"];
+	    c -> d [label="0/0"];
+	    c -> d [label="1/1"];
+	    d -> c [label="0/0"];
+  	  d -> b [label="1/0"];
+    }
+
+
