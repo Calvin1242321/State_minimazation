@@ -54,7 +54,7 @@ You can see the picture of input and output in the file called 'output_pic'
 # How To Execute
 1.Download the file in linux.  
 
-2.Enter to this file.  
+2.Open this file.  
 
 3.Right click to blank space in this folder and select "Open in Terminal".  
 
